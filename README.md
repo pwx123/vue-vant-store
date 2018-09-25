@@ -78,10 +78,10 @@ npm run build
     <img src="https://img.shields.io/travis/rust-lang/rust.svg" alt="Build">
   </a>
   <a href="http://sioxas.github.io/">
-    <img src="https://img.shields.io/badge/express-v4.6.0-blue.svg" alt="Vue">
+    <img src="https://img.shields.io/badge/express-v4.6.0-blue.svg" alt="Express">
   </a>
   <a href="http://sioxas.github.io/">
-    <img src="https://img.shields.io/badge/mysql-v2.16.0-blue.svg" alt="Vuex">
+    <img src="https://img.shields.io/badge/mysql-v2.16.0-blue.svg" alt="Mysql">
   </a>
 </p>
 
@@ -118,3 +118,4 @@ npm start
 ![注册](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/reg.png)
 ### 用户
 ![用户](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/user.png)
+
