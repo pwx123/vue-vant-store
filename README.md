@@ -112,7 +112,7 @@ npm start
 ![订单](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/order.png)
 ![订单列表](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/orderlist.png)
 ### 地址
-![地址](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/adderess.png)
+![地址](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/address.png)
 ### 登录/注册
 ![登录](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/login.png)
 ![注册](https://github.com/pwx123/vue-vant-store/raw/master/screenshots/reg.png)
