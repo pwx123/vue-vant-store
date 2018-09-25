@@ -1,4 +1,5 @@
 module.exports = {
+  baseUrl: './',
   devServer: {
     proxy: {
       '/api': {
