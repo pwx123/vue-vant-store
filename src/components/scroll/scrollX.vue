@@ -74,7 +74,8 @@ export default {
           scrollX: true,
           scrollY: false,
           scrollbar: true,
-          bounce: false
+          bounce: false,
+          eventPassthrough: 'vertical'
         });
       }
       if (this.listenScroll) {
