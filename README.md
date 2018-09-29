@@ -1,12 +1,5 @@
-<p align="center">
-  <a href="https://github.com/pwx123/vue-vant-store" target="_blank">
-    <font size="10">vant-store</font>
-  </a>
-</p>
-<p align="center">
-  商城Demo, 前端使用vant有赞UI,vue实现, 后端使用mysql,express实现。
-</p>
-
+# vant-store
+一个商城Demo, 前端使用vant有赞UI,vue实现, 后端使用mysql,express实现。
 
 # 实现的功能
 
