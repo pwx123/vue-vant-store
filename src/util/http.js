@@ -5,7 +5,7 @@ import router from '@/router';
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
-  axios.defaults.baseURL = 'http://127.0.0.1:3000';
+  axios.defaults.baseURL = '/api';
 } else {
   axios.defaults.baseURL = '/api';
 }
