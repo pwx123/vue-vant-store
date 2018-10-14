@@ -1,7 +1,7 @@
 <template>
   <div class="github">
     <div class="github-content">
-      <a href="https://github.com/pwx123/vue-vant-store">github</a>
+      <a href="https://github.com/pwx123/vue-vant-store" target="_blank">github</a>
       <div class="github-desc">
         <div>点击查看介绍</div>
       </div>
