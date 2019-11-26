@@ -9,6 +9,10 @@ module.exports = {
         pathRewrite: {
           '^/api': '/'
         }
+      },
+      '/img': {
+        target: 'http://127.0.0.1:80',
+        changeOrigin: true
       }
     }
   }

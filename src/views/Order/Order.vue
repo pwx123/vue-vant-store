@@ -126,20 +126,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      var idStr = '';
-      var countStr = '';
       var idArr = [];
-      var countArr = [];
       for (let i = 0; i < this.orderGood.length; i++) {
         idArr.push(this.orderGood[i].Goodid);
-        countArr.push(this.orderGood[0].Cartcount);
       }
-      idStr = '(' + idArr.toString() + ')';
-      countStr = '(' + countArr.toString() + ')';
       var obj = {
-        goodId: idStr,
-        cartCount: countStr,
         addressId: this.defaultAddress.Addressid,
+        goods: this.orderGoodList,
         totalMoney: this.totalMoney / 100
       };
       createOrder(obj)
@@ -182,69 +175,84 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.order
+.order {
   background-color #eee
+}
 
-.address
+.address {
   padding-top 47px
   position relative
   background-color #fff
 
-  &::after
+  &::after {
     content ''
     display block
     height 2px
     background -webkit-repeating-linear-gradient(135deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #3283fa 0, #3283fa 45%, transparent 0, transparent 50%)
     background repeating-linear-gradient(-45deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #3283fa 0, #3283fa 45%, transparent 0, transparent 50%)
     background-size 80px
+  }
 
-  .address-item
+  .address-item {
     padding 15px 10px
 
-    .user-info
+    .user-info {
       margin-left 10px
       font-weight bold
+    }
 
-    .phonenum
+    .phonenum {
       float right
       margin-right 20px
+    }
 
-    .address-bottom
+    .address-bottom {
       margin-top 6px
 
-      .address-info
+      .address-info {
         font-size 14px
         margin-left 24px
         margin-right 20px
         overflow hidden
         text-overflow ellipsis
         white-space nowrap
+      }
+    }
+  }
 
-  .next-icon
+  .next-icon {
     position absolute
     right 10px
     top 76px
 
-    i
+    i {
       font-weight bold
       color #888
+    }
+  }
+}
 
-.allGood
+.allGood {
   margin-top 14px
+}
 
-.cell
+.cell {
   margin-top 10px
+}
 
-.order-footer
+.order-footer {
   height 120px
   margin-top 10px
   text-align center
   font-size 14px
+}
 
-.slide-enter-active, .slide-leave-active
+.slide-enter-active, .slide-leave-active {
   transition all 0.3s
+}
 
-.slide-enter, .slide-leave-to
+.slide-enter, .slide-leave-to {
   opacity 0
   transform translate3d(100%, 0, 0)
+}
 </style>

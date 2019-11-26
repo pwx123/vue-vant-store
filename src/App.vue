@@ -4,7 +4,7 @@
       <router-view/>
     </keep-alive>
     <Tab v-show="!$route.meta.fullScreen" />
-    <Github id="github"/>
+    <!-- <Github id="github"/> -->
   </div>
 </template>
 

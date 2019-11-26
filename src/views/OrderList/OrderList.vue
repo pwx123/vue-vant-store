@@ -10,25 +10,25 @@
       <div class="list-box">
         <van-panel title="订单"
           class="list"
-          v-for="item1 in orderList"
-          :key="item1.Orderid">
-          <van-card v-for="item2 in item1.goods"
+          v-for="order in orderList"
+          :key="order.Orderid">
+          <van-card v-for="good in order.goods"
             class="list-item"
-            :key="item2.Goodid"
-            :title="item2.Goodname.substr(0,10)"
-            :desc="item2.Gooddescribe"
-            :num="item2.orderCount"
-            :price="item2.GoodPriceaftersale"
-            :thumb="item2.GoodImg">
+            :key="good.Goodid"
+            :title="good.Goodname.substr(0,10)"
+            :desc="good.Gooddescribe"
+            :num="good.Count"
+            :price="good.GoodPriceaftersale"
+            :thumb="good.GoodImg">
             <div slot="footer">
               <van-button size="mini"
-                @click="goGood(item2)">查看商品</van-button>
+                @click="goGood(good)">查看商品</van-button>
             </div>
           </van-card>
           <van-cell-group>
             <van-cell title="合计"
               style="color:#f44"
-              :value="'￥'+formatPrice(item1.totalMoney)" />
+              :value="'￥'+formatPrice(order.totalMoney)" />
           </van-cell-group>
         </van-panel>
       </div>
@@ -49,30 +49,8 @@ export default {
   },
   mounted() {
     getOrder()
-      .then(async result => {
-        for (let i = 0; i < result.data.length; i++) {
-          var idArr = result.data[i].Goodid.substring(1, result.data[i].Goodid.length - 1).split(',');
-          var countArr = result.data[i].Ordercount.substring(1, result.data[i].Ordercount.length - 1).split(',');
-          idArr = idArr.map(item => {
-            return parseInt(item);
-          });
-          countArr = countArr.map(item => {
-            return parseInt(item);
-          });
-          var mapped = {};
-          for (let j = 0; j < idArr.length; j++) {
-            mapped[idArr[j]] = countArr[j];
-          }
-          let { data } = await getGoodById({
-            goodId: idArr
-          });
-          for (let k = 0; k < data.length; k++) {
-            data[k].orderCount = mapped[data[k].Goodid];
-          }
-          result.data[i].goods = data;
-        }
-        this.orderList = result.data.reverse();
-        console.log(this.orderList);
+      .then(result => {
+        this.orderList = result.data;
       })
       .catch(error => {
         console.log(err);
@@ -96,28 +74,35 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-.orderlist
+.orderlist {
   background-color #eee
+}
 
-.list-box
+.list-box {
   padding-top 46px
 
-  .list
+  .list {
     margin-top 20px
 
-    &:first-child
+    &:first-child {
       margin-top 0
+    }
+  }
+}
 
-.order-footer
+.order-footer {
   height 50px
   margin-top 20px
   text-align center
   font-size 14px
+}
 
-.slide-enter-active, .slide-leave-active
+.slide-enter-active, .slide-leave-active {
   transition all 0.3s
+}
 
-.slide-enter, .slide-leave-to
+.slide-enter, .slide-leave-to {
   opacity 0
   transform translate3d(100%, 0, 0)
+}
 </style>

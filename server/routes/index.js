@@ -335,7 +335,7 @@ router.post('/getAddress', function(req, res, next) {
 // 获取订单
 router.post('/getOrder', function(req, res, next) {
   var username = req.cookies.username;
-  var sql = `SELECT address.*,userorder.* FROM userorder,address WHERE userorder.Username=? AND userorder.Addressid=address.Addressid`;
+  var sql = `SELECT *  FROM userorder,usersuborder,good WHERE userorder.Username=? AND userorder.Orderid=usersuborder.MainOrderId AND usersuborder.GoodId = good.Goodid;`;
   var sqlParams = [username];
   connection.query(sql, sqlParams, function(err, result) {
     if (err) {
@@ -346,22 +346,41 @@ router.post('/getOrder', function(req, res, next) {
       });
       return;
     }
+    let resultArr = [];
+    let obj = {};
+    for (let i = 0; i < result.length; i++) {
+      const item = result[i];
+      if (obj[item.Orderid]) {
+        obj[item.Orderid].goods.push(item);
+      } else {
+        const { Orderid, Addressid, totalMoney, Status } = item;
+        obj[item.Orderid] = {
+          Orderid,
+          Addressid,
+          totalMoney,
+          Status,
+          goods: [item]
+        };
+      }
+    }
+    Object.keys(obj).forEach(function(key) {
+      resultArr.push(obj[key]);
+    });
     res.json({
       status: 200,
       msg: 'success',
-      data: result
+      data: resultArr
     });
   });
 });
 // 生成订单
 router.post('/createOrder', function(req, res, next) {
   var username = req.cookies.username;
-  var goodId = req.body.goodId;
-  var cartCount = req.body.cartCount;
   var addressId = req.body.addressId;
+  var goods = req.body.goods;
   var totalMoney = req.body.totalMoney;
-  sql = 'INSERT INTO userorder(Username,Goodid,Ordercount,Addressid,Status,totalMoney) VALUES(?,?,?,?,1,?)';
-  var sqlParams = [username, goodId, cartCount, addressId, totalMoney];
+  sql = 'INSERT INTO userorder(Username,Addressid,Status,totalMoney) VALUES(?,?,1,?)';
+  var sqlParams = [username, addressId, totalMoney];
   connection.query(sql, sqlParams, function(err, result) {
     if (err) {
       res.json({
@@ -371,10 +390,26 @@ router.post('/createOrder', function(req, res, next) {
       });
       return;
     }
-    res.json({
-      status: 200,
-      msg: 'success',
-      data: result
+    var arr = [];
+    for (var i = 0; i < goods.length; i++) {
+      arr.push([result.insertId, goods[i].Goodid, goods[i].Cartcount]);
+    }
+    sql = 'INSERT INTO usersuborder(MainOrderId,GoodId,Count) VALUES ?';
+    sqlParams = arr;
+    connection.query(sql, [sqlParams], function(err, result) {
+      if (err) {
+        res.json({
+          status: 500,
+          msg: err,
+          data: ''
+        });
+        return;
+      }
+      res.json({
+        status: 200,
+        msg: 'success',
+        data: result
+      });
     });
   });
 });
